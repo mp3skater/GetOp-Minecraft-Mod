@@ -42,4 +42,5 @@ public class AnvilofSage_Screen extends AbstractContainerScreen<AnvilofSage_Menu
         super.render(pPoseStack, mouseX, mouseY, delta);
         renderTooltip(pPoseStack, mouseX, mouseY);
     }
+
 }

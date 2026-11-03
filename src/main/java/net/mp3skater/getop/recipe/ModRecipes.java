@@ -13,7 +13,6 @@ public class ModRecipes {
   public static final RegistryObject<RecipeSerializer<AnvilOfSageRecipe>> ANVIL_OF_SAGE_SERIALIZER = SERIALIZERS
     .register("anvil_of_sage", () -> AnvilOfSageRecipe.Serializer.INSTANCE);
 
-  public static void register(IEventBus eventBus) {
-    SERIALIZERS.register(eventBus);
+  public static void register(IEventBus eventBus) {SERIALIZERS.register(eventBus);
   }
 }
