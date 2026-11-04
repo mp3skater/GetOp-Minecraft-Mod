@@ -19,6 +19,7 @@ import net.mp3skater.getop.effect.GetOPEffects;
 import net.mp3skater.getop.enchantment.ModEnchantments;
 import net.mp3skater.getop.entity.ModEntityTypes;
 import net.mp3skater.getop.item.ModItems;
+import net.mp3skater.getop.networking.ModMessages;
 import net.mp3skater.getop.particle.ModParticles;
 import net.mp3skater.getop.recipe.ModRecipes;
 import net.mp3skater.getop.screen.ModMenuTypes;
@@ -68,7 +69,11 @@ public class GetOP
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event) {}
+    private void setup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            ModMessages.register(); // <-- DIESE ZEILE HINZUFÜGEN
+        });
+    }
 
     private void onClientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
@@ -88,6 +93,7 @@ public class GetOP
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.HEROBRINE_ALTAR_BLOCK.get(), net.minecraft.client.renderer.RenderType.cutout());
         });
     }
+
 }
 
 
