@@ -39,27 +39,39 @@ public class ModBlocks {
             ModCreativeModeTab.GET_OP_TAB);
 
     public static final RegistryObject<Block> DEATHAXE_ALTAR_BLOCK = registerBlock("deathaxe_altar_block",
-            () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion(),
+            () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE).noOcclusion()
+                    .strength(7.0f, 1200.0f)
+                    .lightLevel(state -> 7),
 							ModItems.BROKEN_DEATHAXE), ModCreativeModeTab.GET_OP_TAB);
 
     public static final RegistryObject<Block> ICE_SCYTHE_ALTAR_BLOCK = registerBlock("ice_scythe_altar_block",
-            () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion(),
+            () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE).noOcclusion()
+                    .strength(7.0f, 1200.0f)
+                    .lightLevel(state -> 7),
 							ModItems.BROKEN_ICE_SCYTHE), ModCreativeModeTab.GET_OP_TAB);
 
     public static final RegistryObject<Block> PICKASHE_ALTAR_BLOCK = registerBlock("pickashe_altar_block",
-            () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion(),
+            () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE).noOcclusion()
+                    .strength(7.0f, 1200.0f)
+                    .lightLevel(state -> 7),
               ModItems.BROKEN_PICKASHE), ModCreativeModeTab.GET_OP_TAB);
 
     public static final RegistryObject<Block> END_SCEPTRE_ALTAR_BLOCK = registerBlock("end_sceptre_altar_block",
-      () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion(),
+      () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE).noOcclusion()
+              .strength(7.0f, 1200.0f)
+              .lightLevel(state -> 7),
         ModItems.BROKEN_END_SCEPTRE), ModCreativeModeTab.GET_OP_TAB);
 
     public static final RegistryObject<Block> ABYSS_SHIELD_ALTAR_BLOCK = registerBlock("abyss_shield_altar_block",
-      () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion(),
+      () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE).noOcclusion()
+              .strength(7.0f, 1200.0f)
+              .lightLevel(state -> 7),
         ModItems.BROKEN_ABYSS_SHIELD), ModCreativeModeTab.GET_OP_TAB);
 
     public static final RegistryObject<Block> HEROBRINE_ALTAR_BLOCK = registerBlock("herobrine_altar_block",
-      () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion(),
+      () -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE).noOcclusion()
+              .strength(10.0f, 1200.0f)
+              .lightLevel(state -> 7),
         ModItems.HEROBRINE_SWORD), ModCreativeModeTab.GET_OP_TAB);
 
     public static final RegistryObject<Block> END_RIFT_BLOCK = registerBlock("end_rift_block",

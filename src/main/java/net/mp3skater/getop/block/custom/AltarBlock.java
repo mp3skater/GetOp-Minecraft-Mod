@@ -8,14 +8,20 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.mp3skater.getop.block.entity.ModBlockEntities;
 import net.mp3skater.getop.block.entity.custom.AltarBlockEntity;
 import org.jetbrains.annotations.Nullable;
@@ -32,6 +38,20 @@ public class AltarBlock extends BaseEntityBlock {
 	public AltarBlock(Properties properties, Supplier<Item> defaultItem) {
 		super(properties);
 		this.defaultItem = defaultItem;
+	}
+
+	// Definiere hier deine Hitbox
+	// Werte: von x1, y1, z1 bis x2, y2, z2 (0 bis 16 ist ein voller Block)
+
+	private static final VoxelShape PLATE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D); // Bodenplatte (4 Pixel hoch)
+	private static final VoxelShape PILLAR = Block.box(7.0D, 2.0D, 7.0D, 9.0D, 11.0D, 9.0D); // Stock/Säule in der Mitte
+
+	// 2. Verbinde sie mit Shapes.or() zu einer einzigen Hitbox
+	private static final VoxelShape SHAPE = Shapes.or(PLATE, PILLAR);
+
+	@Override
+	public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+		return SHAPE;
 	}
 
 	public Item getDefaultItem() {
@@ -107,17 +127,23 @@ public class AltarBlock extends BaseEntityBlock {
 	}
 
 	@Override
-	public List<ItemStack> getDrops(BlockState pState, LootContext.Builder pBuilder) {
-		// Verhindert, dass der Block als Item droppt (weder normal noch mit Seidenberührung)
-		return Collections.emptyList();
+	public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+		// Prüfen, ob der Block wirklich aus der Welt verschwindet (und nicht nur der State gewechselt hat)
+		if (!pState.is(pNewState.getBlock())) {
+			BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+			if (blockEntity instanceof AltarBlockEntity) {
+				if (!pLevel.isClientSide() && pLevel instanceof ServerLevel serverLevel) {
+
+					// 2. Garantiert 700 bis 1400 XP droppen
+					int xp = 700 + serverLevel.random.nextInt(701);
+					this.popExperience(serverLevel, pPos, xp);
+				}
+			}
+			super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+		} else {
+			super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+		}
 	}
 
-	@Override
-	public void spawnAfterBreak(BlockState pState, ServerLevel pLevel, BlockPos pPos, ItemStack pStack) {
-		super.spawnAfterBreak(pState, pLevel, pPos, pStack);
-		// Droppt beim Abbauen immer die XP (700 bis 1400), genau wie ein Spawner
-		int xpAmount = 700 + pLevel.random.nextInt(701);
-		popExperience(pLevel, pPos, xpAmount);
-	}
 
 }
