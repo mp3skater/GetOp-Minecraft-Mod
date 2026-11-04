@@ -1,5 +1,8 @@
 package net.mp3skater.getop.item.custom;
 
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -47,6 +50,18 @@ public class AbyssShieldItem extends ShieldItem {
 			player.getX() - 5, player.getY() - 5, player.getZ() - 5,
 			player.getX() + 5, player.getY() + 5, player.getZ() + 5
 		);
+
+		// Play sound effect
+		level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EVOKER_CAST_SPELL, SoundSource.PLAYERS, 1.0F, 1.0F);
+
+		// Create particles
+		for (int i = 0; i < 100; i++) {
+			double offsetX = (level.random.nextDouble() - 0.5) * 2.0;
+			double offsetY = level.random.nextDouble() * 2.0;
+			double offsetZ = (level.random.nextDouble() - 0.5) * 2.0;
+			level.addParticle(ParticleTypes.END_ROD, player.getX() + offsetX, player.getY() + offsetY, player.getZ() + offsetZ, 0, 0.1, 0);
+		}
+
 		for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, area)) {
 			if (entity != player) { // Don't affect the player
 				// Apply knockback
@@ -58,11 +73,13 @@ public class AbyssShieldItem extends ShieldItem {
 					dz /= distance;
 				}
 
-				double knockbackStrength = 2.0; // Adjust as needed
+				double knockbackStrength = 2.0;
 				entity.setDeltaMovement(dx * knockbackStrength, 0.5, dz * knockbackStrength);
-				entity.hurt(DamageSource.MAGIC, 10.0F); // Adjust damage as needed
+				entity.hurt(DamageSource.MAGIC, 10.0F);
+
+				// Add particles to the affected entity
+				level.addParticle(ParticleTypes.GLOW, entity.getX(), entity.getY() + 1.0, entity.getZ(), 0, 0.2, 0);
 			}
 		}
 	}
 }
-

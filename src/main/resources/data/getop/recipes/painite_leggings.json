@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "PPP",
+        "P P",
+        "P P"
+    ],
+    "key": {
+        "P": {
+            "item": "getop:painite"
+        }
+    },
+    "result": {
+        "item": "getop:painite_leggings",
+        "count": 1
+    }
+}

@@ -97,8 +97,8 @@ public class VoidShredderEntity extends FlyingMob implements IAnimatable, Enemy 
             if(v.y > 0) event.getController().setAnimation(new AnimationBuilder()
               .addAnimation("up", true));
             // down
-            else if(v.y < 0) event.getController().setAnimation(new AnimationBuilder()
-              .addAnimation("down", true));
+//            else if(v.y < 0) event.getController().setAnimation(new AnimationBuilder()
+//              .addAnimation("down", true));
             // idle
             else event.getController().setAnimation(new AnimationBuilder()
                   .addAnimation("idle", true));

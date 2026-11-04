@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "P P",
+        "PPP",
+        "PPP"
+    ],
+    "key": {
+        "P": {
+            "item": "getop:painite"
+        }
+    },
+    "result": {
+        "item": "getop:painite_chestplate",
+        "count": 1
+    }
+}
