@@ -3,8 +3,8 @@
     "icon": {
       "item": "getop:painite_block"
     },
-    "title": "bo",
-    "description": "Create the bo",
+    "title": "Better than full Prot",
+    "description": "Create the Abyss Shield",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true
@@ -17,7 +17,7 @@
         "items": [
           {
             "items": [
-              "getop:deathaxe"
+              "getop:abyss_shield"
             ]
           }
         ]
